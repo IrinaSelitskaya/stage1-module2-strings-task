@@ -23,9 +23,16 @@ public class MethodParser {
      * @return {@link MethodSignature} object filled with parsed values from source string
      */
     public MethodSignature parseFunction(String signatureString) {
+        String accessModifier;
+        String returnType;
+        String methodName=null;
         String[] twoSubstrings = signatureString.split("\\(|\\)");
         String[] firstSubstring = twoSubstrings[0].split("\\s");
-        String methodName = firstSubstring[firstSubstring.length - 1];
+        if(firstSubstring.length==3) {
+            accessModifier = firstSubstring[firstSubstring.length - 3];
+        }else {
+          returnType=firstSubstring[firstSubstring.length-2];
+          methodName = firstSubstring[firstSubstring.length - 1];}
         if(twoSubstrings.length==1){
             return new MethodSignature(methodName);
         } else {
